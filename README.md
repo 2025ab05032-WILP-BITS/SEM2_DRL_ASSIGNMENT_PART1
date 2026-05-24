@@ -1,4 +1,7 @@
-**BIRLA INSTITUTE OF TECHNOLOGY AND SCIENCE, PILANI** **WORK INTEGRATED LEARNING PROGRAMMES DIVISION** **Deep Reinforcement Learning** **Lab Assignment 1** **Total Marks = 10 Marks** (5M for the first part and 5M for the second part)
+# BIRLA INSTITUTE OF TECHNOLOGY AND SCIENCE, PILANI
+## WORK INTEGRATED LEARNING PROGRAMMES DIVISION 
+## Deep Reinforcement Learning Lab Assignment 1
+### Total Marks = 10 Marks** (5M for the first part and 5M for the second part)
 
 **Intended Learning Outcome:** Students should be able to
 
