@@ -1,0 +1,18 @@
+
+**Problem Scenario & Analogy**
+Imagine you are a Chief Medical Officer treating a new disease with **5 candidate medicines** ($K=5$, derived from Group 225). You do not know which one works best. If you only prescribe the first drug that shows minor success, you risk exploiting a mediocre treatment permanently while a true cure sits unused (the danger of pure exploitation). If you test medicines completely at random forever, you ethically compromise patient health just to gather clean data (the danger of over-exploration). This assignment maps this classic **Multi-Armed Bandit (MAB)** dilemma into an engineering framework where you must build a clinical recommendation system that optimizes long-term recoveries across a cohort of 1000 sequential patients.
+
+---
+
+**End-to-End Task Summary**
+
+1. **Task 1: Environment Setup & Dataset Design**
+You must initialize your simulation using seeds locked to your group number (`random.seed(225)` and `np.random.seed(225)`) to guarantee absolute reproducibility. Calculate your group parameters where $K = 5$ medicines, and true hidden success probabilities are calculated as $P = [0.61, 0.68, 0.75, 0.40, 0.47]$. Create a base DataFrame of 1000 sequential patients where each patient's `severity_score` repeats in a deterministic 1 to 5 cycle `((patient_id % 5) + 1)`. Display the environment parameters and print the first 10 rows of your patient table to verify the setup.
+2. **Task 2: Immediate Exploitation Strategy (Pure Greedy)**
+Implement a strict administrative policy. For the first 50 patients (Patients 0 to 49), run a forced round-robin phase where you cycle through all 5 medicines sequentially so each is tested exactly 10 times. At Patient 50, calculate the empirical success rate based on those 10 trials, identify the single best-performing medicine, and permanently prescribe only that drug to all remaining 950 patients.
+3. **Task 3: Controlled Clinical Trial Strategy ($\epsilon$-Greedy)**
+Implement a policy that balances learning. For every incoming patient, flip a weighted coin. With a probability of $1-\epsilon$, perform exploitation by selecting the medicine with the highest current running recovery rate. With a probability of $\epsilon$, intentionally explore by picking a medicine completely at random. Run this complete 1000-patient simulation three separate times to perform a sensitivity analysis at $\epsilon = 0.10$ (10% exploration), $\epsilon = 0.01$ (1% exploration), and $\epsilon = 0.50$ (50% exploration).
+4. **Task 4: Confidence-Based Strategy (UCB1)**
+Implement an Upper Confidence Bound strategy driven by mathematical uncertainty. Initialize the loop by pulling all 5 medicines exactly once across the first 5 patients. For all subsequent patients, select the medicine that maximizes the UCB1 formula: $\text{Average Success Rate} + \sqrt{\frac{2\ln(t)}{\text{Pulls}}}$. This forces the system to naturally favor under-sampled medicines when uncertainty is high and gracefully transition to pure exploitation as global time $t$ grows.
+5. **Task 5: Comparative Analysis & Visualization**
+Use Matplotlib to plot a single line chart comparing all 5 strategy variants ($\text{Greedy}$, $\epsilon\text{-0.01}$, $\epsilon\text{-0.1}$, $\epsilon\text{-0.5}$, and $\text{UCB1}$). The X-axis must trace the timeline of 1000 patients, and the Y-axis must plot the **Cumulative Utility Score** (the running sum of recovery outcomes penalized by patient severity). Based on the final graph, write a 3–5 sentence summary answering which strategy achieves the highest total reward, which converges fastest, which is most stable, and which approach is the safest and most ethical for real-world hospital deployment.
