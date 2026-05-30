@@ -35,8 +35,17 @@ The environment is not just a static grid; it is a **Finite Markov Decision Proc
 
 We use the **Bellman Optimality Equation** to solve the grid:
 
+$$
+V^*(s) = \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma V^*(s') \right]
+$$
 
-$$V^*(s) = \max_a \sum_{s', r} p(s', r | s, a) [r + \gamma V^*(s')]$$
+where:
+- $V^*(s)$ is the optimal value of state $s$
+- $a$ is the action taken
+- $s'$ is the next state
+- $r$ is the immediate reward
+- $\gamma$ is the discount factor
+- $p(s', r \mid s, a)$ is the transition probability
 
 **Why this works:** The drone doesn't just look for the closest rescue target. Because of the `-20` penalty for battery depletion, the Value Iteration forces the drone to "visualize" its future. If a rescue target is 5 steps away but the battery is at 4, the "Value" of those target-facing cells will drop, and the "Value" of the path to the Charging Station will rise.
 
