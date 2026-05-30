@@ -35,9 +35,7 @@ The environment is not just a static grid; it is a **Finite Markov Decision Proc
 
 We use the **Bellman Optimality Equation** to solve the grid:
 
-$$
-V^*(s) = \max_a \sum_{s', r} p(s', r \mid s, a) \left[ r + \gamma V^*(s') \right]
-$$
+V(s) = max_a Σ_{s',r} p(s',r | s,a) [ r + γ V(s') ]
 
 where:
 - $V^*(s)$ is the optimal value of state $s$
